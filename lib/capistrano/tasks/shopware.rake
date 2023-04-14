@@ -66,6 +66,10 @@ namespace :shopware do
         end
       end
     end
+    
+    task :assets_install do
+      invoke! 'shopware:console:execute', 'assets:install'
+    end
 
     task :theme_compile do
       invoke! 'shopware:console:execute', 'theme:compile'
@@ -78,10 +82,6 @@ namespace :shopware do
     task :cache_warmup do
       invoke! 'shopware:console:execute', 'cache:warmup'
       invoke! 'shopware:console:execute', 'http:cache:warm:up'
-    end
-
-    task :assets_install do
-      invoke! 'shopware:console:execute', 'assets:install'
     end
 
     task :database_migrate do
