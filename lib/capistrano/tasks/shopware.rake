@@ -41,6 +41,10 @@ namespace :shopware do
     end
   end
 
+  task :touch_install do
+     execute 'touch install.lock'
+  end
+
   namespace :console do
     task :execute, :param do |t, args|
       on roles(:app) do
@@ -72,10 +76,6 @@ namespace :shopware do
 
     task :database_migrate do
       invoke! 'shopware:console:execute', 'database:migrate --all'
-    end
-
-    task :touch_install do
-      execute 'touch install.lock'
     end
 
     task :maintenance_enable do
