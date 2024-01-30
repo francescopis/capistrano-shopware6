@@ -33,11 +33,11 @@ namespace :shopware do
         invoke! 'shopware:bin:execute', 'build-js.sh'
       end
     end
+  end
 
-    namespace :theme do
-      task :build do
-        invoke! 'shopware:console:execute', 'theme:compile'
-      end
+  namespace :theme do
+    task :build do
+      invoke! 'shopware:console:execute', 'theme:compile'
     end
   end
 
@@ -92,7 +92,7 @@ end
 namespace :deploy do
   after :updated, :shopware do
     invoke 'shopware:console:maintenance_enable'
-    invoke 'shopware:bin:touch_install'
+    invoke 'shopware:touch_install'
     invoke 'composer:install'
     invoke 'shopware:console:database_migrate'
     invoke 'shopware:bin:dependencies:build'
