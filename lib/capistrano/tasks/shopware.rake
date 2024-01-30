@@ -67,7 +67,7 @@ namespace :shopware do
     end
 
     task :cache_warmup do
-      invoke! 'shopware:console:execute', 'cache:warm:up'
+      invoke! 'shopware:console:execute', 'cache:warmup'
     end
 
     task :database_migrate do
