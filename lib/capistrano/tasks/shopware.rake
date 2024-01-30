@@ -42,7 +42,11 @@ namespace :shopware do
   end
 
   task :touch_install do
-     execute 'touch install.lock'
+    on roles(:app) do
+      within release_path do
+         execute 'touch install.lock'
+      end
+    end
   end
 
   namespace :console do
