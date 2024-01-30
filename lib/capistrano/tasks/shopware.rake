@@ -18,26 +18,16 @@ namespace :composer do
 end
 
 namespace :shopware do
-  namespace :bin do
-    task :execute, :param do |t, args|
-      on roles(:app) do
-        within release_path do
-          execute './bin', args[:param]
-        end
-      end
-    end
-
     namespace :dependencies do
       task :build do
         on roles(:app) do
           within release_path do
             execute 'export SHOPWARE_ADMIN_BUILD_ONLY_EXTENSIONS=1 && export DISABLE_ADMIN_COMPILATION_TYPECHECK=1'
-            invoke! 'shopware:bin:execute', 'build-js.sh'
+            execute './bin/build-js.sh'
           end
         end  
       end
     end
-  end
 
   namespace :theme do
     task :build do
@@ -103,7 +93,7 @@ namespace :deploy do
     invoke 'shopware:touch_install'
     invoke 'composer:install'
     invoke 'shopware:console:database_migrate'
-    invoke 'shopware:bin:dependencies:build'
+    invoke 'shopware:dependencies:build'
     invoke 'shopware:console:theme'
     invoke 'shopware:console:cache_clear'
   end
