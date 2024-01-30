@@ -30,9 +30,11 @@ namespace :shopware do
     namespace :dependencies do
       task :build do
         on roles(:app) do
-          execute 'export SHOPWARE_ADMIN_BUILD_ONLY_EXTENSIONS=1 && export DISABLE_ADMIN_COMPILATION_TYPECHECK=1'
+          within release_path do
+            execute 'export SHOPWARE_ADMIN_BUILD_ONLY_EXTENSIONS=1 && export DISABLE_ADMIN_COMPILATION_TYPECHECK=1'
+            invoke! 'shopware:bin:execute', 'build-js.sh'
+          end
         end  
-        invoke! 'shopware:bin:execute', 'build-js.sh'
       end
     end
   end
