@@ -29,12 +29,6 @@ namespace :shopware do
       end
     end
 
-  namespace :theme do
-    task :build do
-      invoke! 'shopware:console:execute', 'theme:compile'
-    end
-  end
-
   task :touch_install do
     on roles(:app) do
       within release_path do
@@ -58,6 +52,10 @@ namespace :shopware do
           execute 'bin/console', args[:param]
         end
       end
+    end
+
+    task :theme do
+      invoke! 'shopware:console:execute', 'theme:compile'
     end
     
     task :cache_clear do
