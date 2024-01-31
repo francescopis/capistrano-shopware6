@@ -1,20 +1,17 @@
 Capistrano tasks for Shopware6
 ===============================
 
-This gem contains instructions to deploy a [Shopware](https://www.shopware.com) 6 instance with [Capistrano](https://capistranorb.com/).
+This gem contains instructions to deploy a [Shopware](https://www.shopware.com) 6.5 on production template instance with [Capistrano](https://capistranorb.com/).
 
 Details
 -------
 
-Deployment process has the following steps:
-
-* `composer install`
 * `bin/console maintenance:enable`
-* `psh.phar update`
-* `bin/console database:migrate_destructive --all`
-* `psh.phar administration:build`
-* `psh.phar storefront:build`
-* `bin/console assets:install`
+* `touch install.lock`
+* `composer install`
+* `bin/console database:migrate --all`
+* `deps build build_js.sh`
+* `bin/console theme:compile`
 * `bin/console maintenance:disable`
 * `bin/console cache:warmup`
 
@@ -23,7 +20,7 @@ Usage
 
 To use this gem add this to your `Gemfile`
 
-`gem "capistrano_shopware6"`
+`gem "capistrano_shopware6_5"`
 
 and then this line to your `Capfile`
 
