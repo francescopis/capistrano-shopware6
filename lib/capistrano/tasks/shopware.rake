@@ -29,26 +29,10 @@ namespace :shopware do
       end
     end
 
-  task :touch_install do
-    on roles(:app) do
-      within release_path do
-         execute 'touch install.lock'
-      end
-    end
-  end
-
   namespace :console do
     task :execute, :param do |t, args|
       on roles(:app) do
         within release_path do
-          execute 'bin/console', args[:param]
-        end
-      end
-    end
-
-    task :execute_current, :param do |t, args|
-      on roles(:app) do
-        within current_path do
           execute 'bin/console', args[:param]
         end
       end
@@ -75,7 +59,7 @@ namespace :shopware do
     end
 
     task :maintenance_enable do
-      invoke! 'shopware:console:execute_current', 'sales-channel:maintenance:enable --all'
+      invoke! 'shopware:console:execute', 'sales-channel:maintenance:enable --all'
     end
 
     task :maintenance_disable do
@@ -88,7 +72,6 @@ end
 namespace :deploy do
   after :updated, :shopware do
     invoke 'shopware:console:maintenance_enable'
-    invoke 'shopware:touch_install'
     invoke 'composer:install'
     invoke 'shopware:console:database_migrate'
     invoke 'shopware:dependencies:build'
