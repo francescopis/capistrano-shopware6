@@ -1,10 +1,7 @@
 set :linked_dirs, fetch(:linked_dirs, []).push(
   'config/jwt',
   'files',
-  'var/log',
-  'public/media',
-  'public/thumbnail',
-  'public/sitemap'
+  'var/log'
 )
 
 namespace :composer do
