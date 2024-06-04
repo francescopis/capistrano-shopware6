@@ -43,10 +43,6 @@ namespace :shopware do
       invoke! 'shopware:console:execute', 'cache:clear'
     end
 
-    task :http_cache_warmup do
-      invoke! 'shopware:console:execute', 'http:cache:warm:up'
-    end
-
     task :cache_warmup do
       invoke! 'shopware:console:execute', 'cache:warmup'
     end
@@ -79,6 +75,5 @@ namespace :deploy do
   after :published, :shopware do
     invoke 'shopware:console:maintenance_disable'
     invoke 'shopware:console:cache_warmup'
-    invoke 'shopware:console:http_cache_warmup'
   end
 end
