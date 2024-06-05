@@ -52,7 +52,7 @@ namespace :shopware do
     end
 
     task :maintenance_enable do
-      invoke! 'shopware:console:execute', 'sales-channel:maintenance:enable --all'
+      invoke! 'shopware:console:execute_current', 'sales-channel:maintenance:enable --all'
     end
 
     task :maintenance_disable do
