@@ -35,6 +35,14 @@ namespace :shopware do
       end
     end
 
+    task :execute_current, :param do |t, args|
+          on roles(:app) do
+            within current_path do
+              execute 'bin/console', args[:param]
+            end
+          end
+        end
+
     task :theme do
       invoke! 'shopware:console:execute', 'theme:compile'
     end
