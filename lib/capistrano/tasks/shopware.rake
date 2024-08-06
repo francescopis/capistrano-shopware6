@@ -75,7 +75,6 @@ namespace :deploy do
     invoke 'composer:install'
     invoke 'shopware:console:database_migrate'
     invoke 'shopware:dependencies:build'
-    invoke 'shopware:console:theme'
     invoke 'shopware:console:cache_clear'
   end
 
